@@ -30,7 +30,6 @@ class FaceMaskCapture():
             inputs = torch.from_numpy(frame).unsqueeze(0).permute(0,3,1,2).float().cpu()
             
         output = self.model(inputs)
-        print(output)
         result = torch.argmax(output, 1).item()
         return self.label[result]
             
