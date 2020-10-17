@@ -9,7 +9,7 @@ train_dataloader = torch.utils.data.DataLoader(
 facemasknet = FaceMaskNet()
 facemasknet = facemasknet.cuda()
 
-epoch = 6
+epoch = 5
 optim = torch.optim.Adam(facemasknet.parameters(), lr=0.001)
 loss_f = torch.nn.NLLLoss()
 
