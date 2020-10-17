@@ -38,23 +38,29 @@ class FaceMaskNet(torch.nn.Module):
             torch.nn.ReLU(),
             torch.nn.Conv2d(256, 256, 3, padding=1),
             torch.nn.BatchNorm2d(256),
-            torch.nn.ReLU(),                
+            torch.nn.ReLU(),
+            torch.nn.Conv2d(256, 256, 3, padding=1),
+            torch.nn.BatchNorm2d(256),
+            torch.nn.ReLU(),            
             torch.nn.MaxPool2d(2, stride=2))
         
         self.conv4_layer = torch.nn.Sequential(
-            torch.nn.Conv2d(256, 256, 3, padding=1),
-            torch.nn.BatchNorm2d(256),
+            torch.nn.Conv2d(256, 512, 3, padding=1),
+            torch.nn.BatchNorm2d(512),
             torch.nn.ReLU(),
-            torch.nn.Conv2d(256, 256, 3, padding=1),
-            torch.nn.BatchNorm2d(256),
-            torch.nn.ReLU(),     
-            torch.nn.MaxPool2d(2, stride=2))      
+            torch.nn.Conv2d(512, 512, 3, padding=1),
+            torch.nn.BatchNorm2d(512),
+            torch.nn.ReLU(),   
+            torch.nn.Conv2d(512, 512, 3, padding=1),
+            torch.nn.BatchNorm2d(512),
+            torch.nn.ReLU(),              
+            torch.nn.MaxPool2d(2, stride=2))         
         
         self.fc_layer = torch.nn.Sequential(
             torch.nn.Flatten(),
-            torch.nn.Linear(256 * 2 * 2, 500),
+            torch.nn.Linear(512 * 2 * 2, 1000),
             torch.nn.ReLU(),
-            torch.nn.Linear(500, 2),                 
+            torch.nn.Linear(1000, 2),                   
             torch.nn.Softmax(1))
         
     def forward(self, inputs):
